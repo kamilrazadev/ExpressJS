@@ -34,7 +34,7 @@ const userSignUp = async (req, res) => {
     } catch (error) {
 
         res.json({
-            message : "Error"
+            message : error.message
         })
 
     }
@@ -86,8 +86,10 @@ const userLogin = async (req, res) => {
 
         
     } catch (error) {
-       console.log(error.message)
-    }
+        
+        res.json({
+            message : error.message
+        })    }
 
 }
 
