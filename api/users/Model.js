@@ -14,6 +14,15 @@ const userSchema = new Schema({
         required : true,
         unique : true
     },
+    role : {
+        type: String,
+        required : true,
+        default : "user"
+    },
+    profile : {
+        type : String,
+        default : "https://cdn-icons-png.flaticon.com/512/6522/6522516.png"
+    },
     joining : {
         type : Date,
         default : Date.now
