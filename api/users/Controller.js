@@ -61,7 +61,9 @@ const userLogin = async (req, res) => {
                     {
                         id : checkUserExists._id,
                         username : checkUserExists.username,
-                        email : checkUserExists.email
+                        email : checkUserExists.email,
+                        profile : checkUserExists.profile,
+                        role : checkUserExists.role
                     }
                     ,
                     process.env.JWT_SECERET
