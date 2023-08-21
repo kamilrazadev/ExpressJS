@@ -9,7 +9,7 @@ const ProductSchema = new Schema({
         type : String,
         required: true
     },
-    ProductCategory : {
+    ProductBrand : {
         type : String,
         required: true
     },
