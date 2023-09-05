@@ -31,12 +31,6 @@ const addBrand = async (req, res) => {
     }
 }
 
-const brandById = (req, res) => {
-    res.json({
-        message: "Done"
-    })
-}
-
 const getAllBrands = async (req, res) => {
     try {
 
@@ -55,4 +49,25 @@ const getAllBrands = async (req, res) => {
     }
 }
 
-module.exports = { addBrand, brandById, getAllBrands }
+const deleteBrand = async (req, res) => {
+    const brandId = req.params.brandId;
+
+    try {
+        await connect(process.env.MONGO_URL);
+        console.log('DB Connected');
+
+        // Delete the brand by ID
+        await Brand.findByIdAndDelete(brandId);
+        res.status(200).json({
+            message: "Brand deleted successfully"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+
+module.exports = { addBrand, getAllBrands, deleteBrand }

@@ -31,12 +31,6 @@ const addCategory = async (req, res) => {
     }
 }
 
-const categoryById = (req, res) => {
-    res.json({
-        message: "Done"
-    })
-}
-
 const getAllCategory = async (req, res) => {
     try {
 
@@ -55,4 +49,24 @@ const getAllCategory = async (req, res) => {
     }
 }
 
-module.exports = { addCategory, categoryById, getAllCategory }
+const deleteCategory = async (req, res) => {
+    const categoryId = req.params.categoryId;
+
+    try {
+        await connect(process.env.MONGO_URL);
+        console.log('DB Connected');
+
+        // Delete the category by ID
+        await Category.findByIdAndDelete(categoryId);
+        res.status(200).json({
+            message: "category deleted successfully"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+module.exports = { addCategory, getAllCategory, deleteCategory }

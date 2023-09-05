@@ -49,4 +49,24 @@ const getAllProducts = async (req, res) => {
     }
 }
 
-module.exports = { addProduct, getAllProducts }
+const deleteProduct = async (req, res) => {
+    const productId = req.params.productId;
+
+    try {
+        await connect(process.env.MONGO_URL);
+        console.log('DB Connected');
+
+        // Delete the product by ID
+        await Product.findByIdAndDelete(productId);
+        res.status(200).json({
+            message: "Product deleted successfully"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+module.exports = { addProduct, getAllProducts, deleteProduct };
